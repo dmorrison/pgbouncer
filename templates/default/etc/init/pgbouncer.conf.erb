@@ -7,6 +7,10 @@ env RUNDIR=<%= @pid_dir %>
 env DAEMON="/usr/sbin/pgbouncer"
 env DAEMON_OPTS="-d -R /etc/pgbouncer/pgbouncer-<%= @db_alias %>.ini"
 
+<% @upstart_limits.each do |key, value| %>
+limit <%= key %> <%= value %>
+<% end unless @upstart_limits.nil? %>
+
 pre-start script
     mkdir -p $RUNDIR || true
     chown $USER:$USER $RUNDIR || true
