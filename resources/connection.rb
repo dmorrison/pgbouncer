@@ -36,6 +36,12 @@ attribute :log_dir, :kind_of => String, :default => '/var/log/pgbouncer'
 attribute :socket_dir, :kind_of => String, :default => '/etc/pgbouncer/db_sockets'
 attribute :pid_dir, :kind_of => String, :default => '/var/run/pgbouncer'
 
+# Use to set limits in the Upstart script, for example:
+# upstart_limits { "nofile" => "64000 64000" }
+# ...sets the Upstart stanza...
+# limit nofile 64000 64000
+attribute :upstart_limits, :kind_of => Hash
+
 attribute :pool_mode, :kind_of => String, :default => 'transaction'
 attribute :max_client_conn, :kind_of => Integer, :default => 60
 attribute :default_pool_size, :kind_of => Integer, :default => 30
